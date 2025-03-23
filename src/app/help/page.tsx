@@ -70,12 +70,12 @@ export default function HelpPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <Navigation />
       
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900">
+      <main className="max-w-7xl mx-auto pt-32 pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12 animate-fadeIn">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4 gradient-text">
             Find Tech Support Near You
           </h1>
           <p className="mt-4 text-xl text-gray-600">
@@ -163,7 +163,7 @@ export default function HelpPage() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 } 

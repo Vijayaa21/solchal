@@ -115,13 +115,13 @@ export default function SolutionsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-white">
       <Navigation />
       
-      <main className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto pt-24 pb-12 px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-12 animate-fadeIn">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4 gradient-text">
             Tech Solutions Library
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -130,7 +130,7 @@ export default function SolutionsPage() {
         </div>
 
         {/* Filters and Search */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-8 glass">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Search */}
             <div className="relative">
@@ -139,10 +139,10 @@ export default function SolutionsPage() {
                 placeholder="Search solutions..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="form-input pl-10"
               />
               <svg
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -161,7 +161,7 @@ export default function SolutionsPage() {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="form-input"
               >
                 {categories.map(category => (
                   <option key={category} value={category}>
@@ -176,7 +176,7 @@ export default function SolutionsPage() {
               <select
                 value={selectedDifficulty}
                 onChange={(e) => setSelectedDifficulty(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="form-input"
               >
                 {difficulties.map(difficulty => (
                   <option key={difficulty} value={difficulty}>
@@ -193,40 +193,43 @@ export default function SolutionsPage() {
           {filteredSolutions.map(solution => (
             <div
               key={solution.id}
-              className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
+              className="modern-card hover-lift group"
             >
               <div className="p-6">
-                <div className="text-4xl mb-4">{solution.thumbnail}</div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                  {solution.thumbnail}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
                   {solution.title}
                 </h3>
                 <p className="text-gray-600 mb-4">
                   {solution.description}
                 </p>
                 <div className="flex items-center justify-between mb-4">
-                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getDifficultyColor(solution.difficulty)}`}>
+                  <span className={`badge ${getDifficultyColor(solution.difficulty)}`}>
                     {solution.difficulty}
                   </span>
                   <span className="text-sm text-gray-500">
-                    {solution.timeToFix}
+                    ⏱️ {solution.timeToFix}
                   </span>
                 </div>
-                <div className="flex items-center justify-between text-sm text-gray-500">
-                  <div className="flex items-center space-x-2">
+                
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-2 text-gray-600">
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
                     <span>{solution.views.toLocaleString()}</span>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 text-gray-600">
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                     <span>{solution.likes.toLocaleString()}</span>
                   </div>
                 </div>
-                <button className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
+                <button className="w-full btn-primary">
                   View Solution
                 </button>
               </div>
@@ -236,6 +239,7 @@ export default function SolutionsPage() {
 
         {filteredSolutions.length === 0 && (
           <div className="text-center py-12">
+            <div className="text-6xl mb-4">🔍</div>
             <h3 className="text-xl font-medium text-gray-900 mb-2">
               No solutions found
             </h3>
